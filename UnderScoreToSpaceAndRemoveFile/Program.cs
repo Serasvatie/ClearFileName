@@ -32,6 +32,7 @@ namespace UnderScoreToSpaceAndRemoveFile
                     RuleFile(f);
                 }
                 RuleDirectory(d);
+                DirRecursive(d);
             }
         }
         
