@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClearFileName", "UnderScoreToSpaceAndRemoveFile\ClearFileName.csproj", "{1C92D4E6-AE28-40F5-9D52-C5741DA34FC9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClearFileName", "ClearFileName\ClearFileName.csproj", "{1C92D4E6-AE28-40F5-9D52-C5741DA34FC9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
