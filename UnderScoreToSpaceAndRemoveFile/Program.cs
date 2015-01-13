@@ -13,7 +13,7 @@ namespace UnderScoreToSpaceAndRemoveFile
         {
             try
             {
-                if (args.Length != 3)
+                if (args.Length < 2 && args.Length > 3)
                     throw new Exception("Bad Number Argument");
                 Factory General = new Factory();
                 General.ParseArgument(args);
@@ -22,7 +22,7 @@ namespace UnderScoreToSpaceAndRemoveFile
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error : " + e.Message + "!");
+                Console.WriteLine("Error : " + e.Message + " " + e.TargetSite + " " + e.StackTrace + "!");
             }
             Console.ReadLine();
         }

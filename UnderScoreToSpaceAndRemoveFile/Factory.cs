@@ -21,11 +21,19 @@ namespace UnderScoreToSpaceAndRemoveFile
                 File.Delete(file);
         }
 
-        private void ChangeName(string directory)
+        private void ChangeNameDirectory(string directory)
         {
             string newName = directory.Replace("_", " ");
             if (newName != directory)
                 Directory.Move(directory, newName);
+        }
+
+        private void ChangeNameFile(string file)
+        {
+            string newName = file.Replace("_", " ");
+            Console.WriteLine(newName + " " + file);
+            if (newName != file)
+                File.Move(file, newName);
         }
 
         public void DirRecursive()
@@ -34,12 +42,13 @@ namespace UnderScoreToSpaceAndRemoveFile
             {
                 foreach (string f in Directory.GetFiles(d))
                 {
+                    //if (Cible == target.ALL || Cible == target.FILE)
+                    // probleme change les charactere de tous le chemin y compris les nomde de dossiers qui sont avec underscore
+                    //    ChangeNameFile(f);
                     RemoveSpecificFile(f);
-                    if (Cible == target.ALL || Cible == target.FILE)
-                        ChangeName(f);
                 }
                 if (Cible == target.ALL || Cible == target.DIRECTORY)
-                    ChangeName(d);
+                    ChangeNameDirectory(d);
                 if (Recursive)
                     DirRecursive();
             }
