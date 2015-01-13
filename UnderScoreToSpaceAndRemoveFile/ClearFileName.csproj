@@ -7,8 +7,8 @@
     <ProjectGuid>{1C92D4E6-AE28-40F5-9D52-C5741DA34FC9}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UnderScoreToSpaceAndRemoveFile</RootNamespace>
-    <AssemblyName>UnderScoreToSpaceAndRemoveFile</AssemblyName>
+    <RootNamespace>ClearFileName</RootNamespace>
+    <AssemblyName>ClearFileName</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
