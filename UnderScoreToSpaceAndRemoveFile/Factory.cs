@@ -30,22 +30,20 @@ namespace UnderScoreToSpaceAndRemoveFile
 
         private void ChangeNameFile(string file)
         {
-            string newName = file.Replace("_", " ");
-            Console.WriteLine(newName + " " + file);
-            if (newName != file)
-                File.Move(file, newName);
+            int index = file.LastIndexOf("\\");
+            string newPath = file.Substring(0, index) + file.Substring(index).Replace("_", " ");
+            if (newPath != file)
+                File.Move(file, newPath);
         }
 
-        public void DirRecursive(string defaultParam = "default" )
+        public void DirRecursive(string defaultParam = "default")
         {
-            //Console.WriteLine(defaultParam + " " + GeneralDiretory);
             foreach (string d in Directory.GetDirectories(defaultParam == "default" ? GeneralDiretory : defaultParam))
             {
                 foreach (string f in Directory.GetFiles(d))
                 {
-                    //if (Cible == target.ALL || Cible == target.FILE)
-                    // probleme change les charactere de tous le chemin y compris les nomde de dossiers qui sont avec underscore
-                    //    ChangeNameFile(f);
+                    if (Cible == target.ALL || Cible == target.FILE)
+                        ChangeNameFile(f);
                     RemoveSpecificFile(f);
                 }
                 if (Recursive)
