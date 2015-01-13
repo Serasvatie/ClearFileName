@@ -22,7 +22,7 @@ namespace UnderScoreToSpaceAndRemoveFile
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error : " + e.Message + " " + e.TargetSite + " " + e.StackTrace + "!");
+                Console.WriteLine("Error : " + e.Message + "!");
             }
             Console.ReadLine();
         }

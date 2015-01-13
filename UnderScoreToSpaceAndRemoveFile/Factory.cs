@@ -36,9 +36,10 @@ namespace UnderScoreToSpaceAndRemoveFile
                 File.Move(file, newName);
         }
 
-        public void DirRecursive()
+        public void DirRecursive(string defaultParam = "default" )
         {
-            foreach (string d in Directory.GetDirectories(GeneralDiretory))
+            //Console.WriteLine(defaultParam + " " + GeneralDiretory);
+            foreach (string d in Directory.GetDirectories(defaultParam == "default" ? GeneralDiretory : defaultParam))
             {
                 foreach (string f in Directory.GetFiles(d))
                 {
@@ -47,10 +48,10 @@ namespace UnderScoreToSpaceAndRemoveFile
                     //    ChangeNameFile(f);
                     RemoveSpecificFile(f);
                 }
+                if (Recursive)
+                    DirRecursive(d);
                 if (Cible == target.ALL || Cible == target.DIRECTORY)
                     ChangeNameDirectory(d);
-                if (Recursive)
-                    DirRecursive();
             }
         }
 
