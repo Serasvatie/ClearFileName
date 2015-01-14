@@ -1,0 +1,20 @@
+﻿<Window x:Class="ClearFileNameWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Clear" Height="225" Width="210"
+        ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="67*"/>
+            <RowDefinition Height="94*"/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="Path" Text="{Binding Directory}" HorizontalAlignment="Left" Height="23" Margin="10,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <CheckBox x:Name="FileBox" Content="File" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" Height="17" Grid.RowSpan="2"/>
+        <CheckBox x:Name="DirectoryBox" Content="Directory" HorizontalAlignment="Left" Margin="10,18.4,0,0" VerticalAlignment="Top" Height="16" Grid.Row="1"/>
+        <CheckBox x:Name="RecursiveBox" Content="Recursive" HorizontalAlignment="Left" Margin="10,39.4,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Button Content="Directory" Click="ChooseDirectory" HorizontalAlignment="Left" Margin="135,49,0,0" VerticalAlignment="Top" Width="54"/>
+        <Button Content="Clear" Click="Clear" HorizontalAlignment="Left" Margin="10,68.4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="174"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Clear File and Directory" VerticalAlignment="Top" Height="34" Width="174" FontWeight="Bold" TextAlignment="Center" FontSize="15"/>
+
+    </Grid>
+</Window>
