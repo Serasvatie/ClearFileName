@@ -65,7 +65,6 @@ namespace ClearFileNameWPF
             GeneralDiretory = path;
             Recursive = rec;
             Cible = cible;
-            System.Windows.MessageBox.Show(Cible.ToString());
             DirRecursive();
         }
     }
