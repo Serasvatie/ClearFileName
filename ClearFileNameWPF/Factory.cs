@@ -23,7 +23,8 @@ namespace ClearFileNameWPF
 
         private void ChangeNameDirectory(string directory)
         {
-            string newName = directory.Replace("_", " ");
+            int index = directory.LastIndexOf("\\");
+            string newName = directory.Substring(0, index) + directory.Substring(index).Replace("_", " ");
             if (newName != directory)
                 Directory.Move(directory, newName);
         }
@@ -38,6 +39,12 @@ namespace ClearFileNameWPF
 
         private void DirRecursive(string defaultParam = "default")
         {
+            foreach (string f in Directory.GetFiles(defaultParam == "default" ? GeneralDiretory : defaultParam))
+            {
+                if (Cible == target.ALL || Cible == target.FILE)
+                    ChangeNameFile(f);
+                RemoveSpecificFile(f);
+            }
             foreach (string d in Directory.GetDirectories(defaultParam == "default" ? GeneralDiretory : defaultParam))
             {
                 foreach (string f in Directory.GetFiles(d))
@@ -58,6 +65,7 @@ namespace ClearFileNameWPF
             GeneralDiretory = path;
             Recursive = rec;
             Cible = cible;
+            System.Windows.MessageBox.Show(Cible.ToString());
             DirRecursive();
         }
     }

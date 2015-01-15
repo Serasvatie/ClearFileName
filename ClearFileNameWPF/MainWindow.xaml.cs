@@ -15,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace ClearFileNameWPF
 {
@@ -47,23 +49,41 @@ namespace ClearFileNameWPF
         {
             InitializeComponent();
             Directory = "Select Path...";
+            if (File.Exists("LastPath.xml"))
+            {
+                XmlSerializer xs = new XmlSerializer(typeof(string));
+                using (StreamReader rd = new StreamReader("LastPath.xml"))
+                {
+                    Directory = xs.Deserialize(rd) as string;
+                }
+            }
             this.DataContext = this;
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            XmlSerializer xs = new XmlSerializer(typeof(string));
+            using (StreamWriter wr = new StreamWriter("LastPath.xml"))
+            {
+                xs.Serialize(wr, Directory);
+            }
         }
 
         private void Clear(object sender, RoutedEventArgs e)
         {
             if (!FileBox.IsChecked.Value && !DirectoryBox.IsChecked.Value)
+            {
                 System.Windows.MessageBox.Show("Check File or Directory !");
+                return;
+            }
 
             Factory factory = new Factory();
             Factory.target cible = new Factory.target();
-            if (FileBox.IsChecked.Value)
-            {
+            if (DirectoryBox.IsChecked.Value && FileBox.IsChecked.Value)
+                cible = Factory.target.ALL;
+            else if (FileBox.IsChecked.Value)
                 cible = Factory.target.FILE;
-                if (DirectoryBox.IsChecked.Value)
-                    cible = Factory.target.ALL;
-            }
-            if (DirectoryBox.IsChecked.Value)
+            else if (DirectoryBox.IsChecked.Value)
                 cible = Factory.target.DIRECTORY;
             factory.InitAndDoIt(Directory, RecursiveBox.IsChecked.Value, cible);
         }
@@ -71,6 +91,7 @@ namespace ClearFileNameWPF
         private void ChooseDirectory(object sender, RoutedEventArgs e)
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
+            dialog.SelectedPath = Directory;
             dialog.ShowDialog();
             Directory = dialog.SelectedPath;
         }
