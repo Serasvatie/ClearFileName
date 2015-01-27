@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
@@ -20,9 +21,13 @@ using System.Xml.Serialization;
 
 namespace ClearFileNameWPF
 {
+    public enum target { FILE = 1, DIRECTORY = 2, ALL = 0 };
+
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        public ObservableCollection<string> list_extension;
         private string _directory;
+        private string _extension;
         public string Directory
         {
             get
@@ -35,6 +40,19 @@ namespace ClearFileNameWPF
                 this.OnPropertyChanged("Directory");
             }
         }
+        public string Extension
+        {
+            get
+            {
+                return _extension;
+            }
+            set
+            {
+                _extension = value;
+                this.OnPropertyChanged("Extension");
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string name)
@@ -49,6 +67,7 @@ namespace ClearFileNameWPF
         {
             InitializeComponent();
             Directory = "Select Path...";
+            Extension = "";
             if (File.Exists("LastPath.xml"))
             {
                 XmlSerializer xs = new XmlSerializer(typeof(string));
@@ -57,6 +76,8 @@ namespace ClearFileNameWPF
                     Directory = xs.Deserialize(rd) as string;
                 }
             }
+            list_extension = new ObservableCollection<string>();
+            listExtension.ItemsSource = list_extension;
             this.DataContext = this;
         }
 
@@ -69,23 +90,18 @@ namespace ClearFileNameWPF
             }
         }
 
-        private void Clear(object sender, RoutedEventArgs e)
+        private void AddExtension(object sender, RoutedEventArgs e)
         {
-            if (!FileBox.IsChecked.Value && !DirectoryBox.IsChecked.Value)
-            {
-                System.Windows.MessageBox.Show("Check File or Directory !");
-                return;
-            }
+            list_extension.Add(Extension);
+        }
 
-            Factory factory = new Factory();
-            Factory.target cible = new Factory.target();
-            if (DirectoryBox.IsChecked.Value && FileBox.IsChecked.Value)
-                cible = Factory.target.ALL;
-            else if (FileBox.IsChecked.Value)
-                cible = Factory.target.FILE;
-            else if (DirectoryBox.IsChecked.Value)
-                cible = Factory.target.DIRECTORY;
-            factory.InitAndDoIt(Directory, RecursiveBox.IsChecked.Value, cible);
+        private void RemoveExtension(object sender, RoutedEventArgs e)
+        {
+            int pos = listExtension.SelectedIndex;
+            if (pos != -1)
+            {
+                list_extension.RemoveAt(pos);
+            }
         }
 
         private void ChooseDirectory(object sender, RoutedEventArgs e)
@@ -94,6 +110,16 @@ namespace ClearFileNameWPF
             dialog.SelectedPath = Directory;
             dialog.ShowDialog();
             Directory = dialog.SelectedPath;
+        }
+
+        private void OrderExtension(object sender, RoutedEventArgs e)
+        {
+            list_extension = new ObservableCollection<string>(list_extension.OrderBy(i =>i));
+        }
+        //FAIRE DO REMOVE ASYNC TASK
+        private void DoRemove(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

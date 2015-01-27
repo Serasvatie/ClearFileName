@@ -10,7 +10,6 @@ namespace ClearFileNameWPF
     class Factory
     {
         private Boolean Recursive = false;
-        public enum target { FILE = 1, DIRECTORY = 2, ALL = 0 };
         private target Cible;
         private string GeneralDiretory;
 
