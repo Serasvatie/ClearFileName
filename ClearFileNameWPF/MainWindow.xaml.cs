@@ -76,6 +76,14 @@ namespace ClearFileNameWPF
                     Directory = xs.Deserialize(rd) as string;
                 }
             }
+            if (File.Exists("Extension.xml"))
+            {
+                XmlSerializer xs = new XmlSerializer(typeof(ObservableCollection<string>));
+                using (StreamReader rd = new StreamReader("Extension.xml"))
+                {
+                    list_extension = new ObservableCollection<string>(xs.Deserialize(rd) as ObservableCollection<string>);
+                }
+            }
             list_extension = new ObservableCollection<string>();
             listExtension.ItemsSource = list_extension;
             this.DataContext = this;
@@ -87,6 +95,11 @@ namespace ClearFileNameWPF
             using (StreamWriter wr = new StreamWriter("LastPath.xml"))
             {
                 xs.Serialize(wr, Directory);
+            }
+            xs = new XmlSerializer(typeof(ObservableCollection<String>));
+            using (StreamWriter wr = new StreamWriter("Extension.xml"))
+            {
+                xs.Serialize(wr, list_extension);
             }
         }
 
@@ -103,7 +116,7 @@ namespace ClearFileNameWPF
                 list_extension.RemoveAt(pos);
             }
         }
-
+        
         private void ChooseDirectory(object sender, RoutedEventArgs e)
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
@@ -116,10 +129,24 @@ namespace ClearFileNameWPF
         {
             list_extension = new ObservableCollection<string>(list_extension.OrderBy(i =>i));
         }
-        //FAIRE DO REMOVE ASYNC TASK
-        private void DoRemove(object sender, RoutedEventArgs e)
-        {
 
+//FAIRE ASYNC TASK ET LOGFILE
+
+        private async void DoRemove(object sender, RoutedEventArgs e)
+        {
+            string ret = await gotoremove();
+            if (ret != "\n")
+            {
+                System.Windows.Forms.MessageBox.Show("Error detected during the action of removing files !\n Check Log file !");
+
+            }
+        }
+
+        private async Task<string> gotoremove()
+        {
+            FactoryRemove remove = new FactoryRemove(Directory, RecursiveBoxRemove.IsChecked.Value, new List<string>(list_extension));
+            remove.Run();
+            return ret ;
         }
     }
 }

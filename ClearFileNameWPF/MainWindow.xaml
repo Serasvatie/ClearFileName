@@ -29,9 +29,9 @@
                     <TextBox HorizontalAlignment="Left" Height="23" Margin="10,254,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
                     <Button Content="Change Name" HorizontalAlignment="Left" Margin="10,282,0,0" VerticalAlignment="Top" Width="311"/>
                     <TextBlock HorizontalAlignment="Left" Margin="10,233,0,0" TextWrapping="Wrap" Text="Select directory :" VerticalAlignment="Top" Width="217"/>
-                    <CheckBox x:Name="FileBox_Copy" Content="File" HorizontalAlignment="Left" Margin="236,156,0,0" VerticalAlignment="Top" Height="17" Width="85"/>
-                    <CheckBox x:Name="DirectoryBox_Copy" Content="Directory" HorizontalAlignment="Left" Margin="236,177,0,0" VerticalAlignment="Top" Height="16" Width="85"/>
-                    <CheckBox x:Name="RecursiveBox_Copy1" Content="Recursive" HorizontalAlignment="Left" Margin="236,198,0,0" VerticalAlignment="Top" Width="85"/>
+                    <CheckBox x:Name="FileBox" Content="File" HorizontalAlignment="Left" Margin="236,156,0,0" VerticalAlignment="Top" Height="17" Width="85"/>
+                    <CheckBox x:Name="DirectoryBox" Content="Directory" HorizontalAlignment="Left" Margin="236,177,0,0" VerticalAlignment="Top" Height="16" Width="85"/>
+                    <CheckBox x:Name="RecursiveBoxFile" Content="Recursive" HorizontalAlignment="Left" Margin="236,198,0,0" VerticalAlignment="Top" Width="85"/>
 
                 </Grid>
             </TabItem>
@@ -53,7 +53,7 @@
                     <TextBox Text="{Binding Directory}" HorizontalAlignment="Left" Height="23" Margin="10,254,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
                     <Button Click="DoRemove" Content="Remove file" HorizontalAlignment="Left" Margin="10,282,0,0" VerticalAlignment="Top" Width="311"/>
                     <TextBlock HorizontalAlignment="Left" Margin="10,233,0,0" TextWrapping="Wrap" Text="Select directory :" VerticalAlignment="Top" Width="217"/>
-                    <CheckBox x:Name="RecursiveBox_Copy" Content="Recursive" HorizontalAlignment="Left" Margin="236,209,0,0" VerticalAlignment="Top" Width="82" IsChecked="True"/>
+                    <CheckBox x:Name="RecursiveBoxRemove" Content="Recursive" HorizontalAlignment="Left" Margin="236,209,0,0" VerticalAlignment="Top" Width="82" IsChecked="True"/>
                     <Button Click="RemoveExtension" Content="Remove" HorizontalAlignment="Left" Margin="236,123,0,0" VerticalAlignment="Top" Width="85"/>
                     <Button Click="ChooseDirectory"  Content="Select directory" HorizontalAlignment="Left" Margin="236,255,0,0" VerticalAlignment="Top" Width="85"/>
                 </Grid>
